@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Create a Belgian style OGM "gestructureerde mededeling".
+# If no input string is given, a random OGM is generated.
+#
+# Examples
+# --------
+#           ogm
+#           => +++327/2100/00067+++
+#
+#           ogm 192.005050
+#           => +++192/0050/50005+++
+#
+#           ogm 5641
+#           => +++564/1000/00017+++
+
+if [ -z $1 ]
+then
+    RANDOM=$$;
+    IN_VAR="$RANDOM";
+else
+    IN_VAR="$1";
+fi
+
+IN_NUMERIC=$(
+    echo "$IN_VAR" \
+    | sed 's/[^0-9]*//g' \
+    | xargs printf "%-10s%s\n" \
+    | sed 's/ /0/g'
+);
+IN_NUMERIC=${IN_NUMERIC:0:10};
+
+CHECKSUM=$(printf "%02d" $(($IN_NUMERIC % 97)));
+OUT_NUMERIC=$(echo "$IN_NUMERIC$CHECKSUM");
+echo "+++${OUT_NUMERIC:0:3}/${OUT_NUMERIC:3:4}/${OUT_NUMERIC:7:5}+++";

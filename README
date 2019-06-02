@@ -1,0 +1,28 @@
+OGM
+===
+
+OGM creates a Belgian style "gestructureerde mededeling".
+If no input string is given, a random OGM is generated.
+
+Usage
+-----
+
+    ogm 192.005050
+    => +++192/0050/50005+++
+          ^^^^^^^^^^^
+
+    ogm 5641
+    => +++564/1000/00017+++
+          ^^^^^
+
+    ogm
+    => +++327/2100/00067+++
+
+Installation
+------------
+
+Put the file ogm in your path and make it executable.
+E.g.:
+
+    mv ogm /usr/local/bin
+    chmod +x /usr/local/bin/ogm
